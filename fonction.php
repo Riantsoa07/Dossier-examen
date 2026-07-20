@@ -22,6 +22,7 @@ function verifie_login($numero_etu){
     return $result; 
 }
 
+<<<<<<< HEAD
 function insert_membre($nom,$numero_etu){
 
     $sql = "INSERT INTO membre
@@ -32,3 +33,30 @@ function insert_membre($nom,$numero_etu){
     mysqli_query(dbconnect(),$sql);
 }
 ?>
+=======
+
+function getProduits(){
+    $sql="SELECT 
+                produit_membre.id_produit_membre,
+                produit.nom,
+                categorie.nom_categorie,
+                membre.nom AS vendeur,
+                produit_membre.prix_vente,
+                produit_membre.quantite_dispo,
+                produit_membre.date_dispo
+            FROM produit_membre JOIN produit 
+            ON produit.id_produit = produit_membre.id_produit JOIN categorie
+            ON categorie.id_categorie = produit.id_categorie JOIN membre
+            ON membre.id_membre = produit_membre.id_membre
+            WHERE produit_membre.quantite_dispo > 0";
+    $news_req = mysqli_query(dbconnect(),$sql);
+    $result = array();
+    while ($news = mysqli_fetch_assoc($news_req)){
+        $result[] = $news;
+    }
+    mysqli_free_result($news_req);
+    return $result; 
+}
+?>
+
+>>>>>>> ba3db935279c0180a645e6394424c169ec5c3fec

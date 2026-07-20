@@ -22,7 +22,6 @@ function verifie_login($numero_etu){
     return $result; 
 }
 
-
 function getProduits(){
     $sql="SELECT 
                 produit_membre.id_produit_membre,
@@ -45,5 +44,21 @@ function getProduits(){
     mysqli_free_result($news_req);
     return $result; 
 }
-?>
 
+function getListeProduits(){
+
+    $sql="SELECT * FROM produit";
+
+    $req=mysqli_query(dbconnect(),$sql);
+
+    $result=array();
+
+    while($produit=mysqli_fetch_assoc($req)){
+        $result[]=$produit;
+    }
+
+    mysqli_free_result($req);
+
+    return $result;
+}
+?>

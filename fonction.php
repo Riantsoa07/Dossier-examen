@@ -20,21 +20,16 @@ function verifie_login($numero_etu){
     }
     mysqli_free_result($news_req);
     return $result; 
+    function insert_membre($nom,$numero_etu){
+
+        $sql = "INSERT INTO membre
+                (nom, numero_etu, image_profil)
+                VALUES
+                ('$nom','$numero_etu','')";
+    
+        mysqli_query(dbconnect(),$sql);
+    }
 }
-
-<<<<<<< HEAD
-function insert_membre($nom,$numero_etu){
-
-    $sql = "INSERT INTO membre
-            (nom, numero_etu, image_profil)
-            VALUES
-            ('$nom','$numero_etu','')";
-
-    mysqli_query(dbconnect(),$sql);
-}
-?>
-=======
-
 function getProduits(){
     $sql="SELECT 
                 produit_membre.id_produit_membre,
@@ -59,4 +54,7 @@ function getProduits(){
 }
 ?>
 
->>>>>>> ba3db935279c0180a645e6394424c169ec5c3fec
+
+
+
+

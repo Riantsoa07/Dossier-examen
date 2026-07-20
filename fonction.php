@@ -124,5 +124,73 @@ function getMesVentes($id_membre){
 
     return $result;
 }
+function getStatCategorie(){
+    $sql="select categorie.id_categorie,categorie.nom_categorie,count(vente.id_vente) as total from categorie
+join produit on categorie.id_categorie = produit.id_categorie
+join produit_membre on produit.id_produit = produit_membre.id_produit
+join vente on produit_membre.id_produit_membre = vente.id_produit_membre
+group by categorie.id_categorie ;";
+    $news_req = mysqli_query(dbconnect(),$sql);
+    $result = array();
+    while ($news = mysqli_fetch_assoc($news_req)){
+        $result[] = $news;
+    }
+    mysqli_free_result($news_req);
+    return $result; 
+}
+
+function getStatProduit($id_categorie){
+    $sql="select produit.id_produit,produit.nom,count(vente.id_vente) as total from produit
+join produit_membre on produit.id_produit = produit_membre.id_produit
+join vente on produit_membre.id_produit_membre = vente.id_produit_membre where produit.id_categorie = '$id_categorie'
+group by produit.id_produit";
+    $news_req = mysqli_query(dbconnect(),$sql);
+    $result = array();
+    while ($news = mysqli_fetch_assoc($news_req)){
+        $result[] = $news;
+    }
+    mysqli_free_result($news_req);
+    return $result; 
+}
+function getStatMembre($id_produit){
+    $sql="select membre.id_membre,membre.nom,count(vente.id_vente) as total from membre
+join produit_membre on membre.id_membre = produit_membre.id_membre
+join vente on produit_membre.id_produit_membre = vente.id_produit_membre where produit_membre.id_produit = '$id_produit'
+group by membre.id_membre";
+    $news_req = mysqli_query(dbconnect(),$sql);
+    $result = array();
+    while ($news = mysqli_fetch_assoc($news_req)){
+        $result[] = $news;
+    }
+    mysqli_free_result($news_req);
+    return $result; 
+}
+
+function insert_produit($nom,$id_categorie,$prix_reference,$perime,$image){
+
+    $sql = "INSERT INTO produit
+            (nom,id_categorie,prix_reference,perime,image)
+            VALUES
+            ('$nom','$id_categorie','$prix_reference','$perime','$image')";
+
+    mysqli_query(dbconnect(),$sql);
+}
+
+function getCategorie(){
+
+    $sql = "SELECT * FROM categorie";
+
+    $news_req = mysqli_query(dbconnect(),$sql);
+
+    $result = array();
+
+    while($news = mysqli_fetch_assoc($news_req)){
+        $result[] = $news;
+    }
+
+    mysqli_free_result($news_req);
+
+    return $result;
+}
 
 ?>

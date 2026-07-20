@@ -40,14 +40,19 @@ function getProduits(){
     $sql="SELECT 
                 produit_membre.id_produit_membre,
                 produit.nom,
+                produit.photo AS photo_produit,
+                produit_membre.photo,
                 categorie.nom_categorie,
                 membre.nom AS vendeur,
                 produit_membre.prix_vente,
                 produit_membre.quantite_dispo,
                 produit_membre.date_dispo
-            FROM produit_membre JOIN produit 
-            ON produit.id_produit = produit_membre.id_produit JOIN categorie
-            ON categorie.id_categorie = produit.id_categorie JOIN membre
+            FROM produit_membre 
+            JOIN produit 
+            ON produit.id_produit = produit_membre.id_produit 
+            JOIN categorie
+            ON categorie.id_categorie = produit.id_categorie 
+            JOIN membre
             ON membre.id_membre = produit_membre.id_membre
             WHERE produit_membre.quantite_dispo > 0";
     $news_req = mysqli_query(dbconnect(),$sql);
@@ -80,11 +85,11 @@ function getListeProduits(){
     return $result; 
 }
 
-function vendreProduits($id_produit,$id_membre,$prix_vente,$quantite_dispo,$date_dispo){
+function vendreProduits($id_produit,$id_membre,$prix_vente,$quantite_dispo,$date_dispo,$photo){
     $sql="INSERT INTO produit_membre
-            (id_produit,id_membre,prix_vente,quantite_dispo,date_dispo)
+            (id_produit,id_membre,prix_vente,quantite_dispo,date_dispo,photo)
             VALUES
-            ('$id_produit','$id_membre','$prix_vente','$quantite_dispo','$date_dispo')";
+            ('$id_produit','$id_membre','$prix_vente','$quantite_dispo','$date_dispo','$photo')";
     $news_req = mysqli_query(dbconnect(),$sql);
     $result = array();
     while ($news = mysqli_fetch_assoc($news_req)){
@@ -100,18 +105,24 @@ function getMesVentes($id_membre){
                 produit.nom,
                 produit_membre.prix_vente,
                 produit_membre.quantite_dispo,
-                produit_membre.date_dispo
-            FROM produit_membre
-            JOIN produit
-            ON produit.id_produit = produit_membre.id_produit
-            WHERE produit_membre.id_membre = '$id_membre'";
+                produit_membre.date_dispo,
+                produit_membre.photo
+          FROM produit_membre
+          JOIN produit
+          ON produit.id_produit = produit_membre.id_produit
+          WHERE produit_membre.id_membre = '$id_membre'";
+
     $news_req = mysqli_query(dbconnect(),$sql);
+
     $result = array();
+
     while ($news = mysqli_fetch_assoc($news_req)){
         $result[] = $news;
     }
+
     mysqli_free_result($news_req);
-    return $result; 
+
+    return $result;
 }
 
 ?>

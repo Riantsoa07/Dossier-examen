@@ -82,3 +82,25 @@ INSERT INTO produit_membre(id_produit_membre,id_produit,id_membre,prix_vente,qua
 (3,3,3,8000,10,'2026-07-20'),
 (4,4,4,3000,20,'2026-07-20'),
 (5,5,5,4500,15,'2026-07-20');
+
+ALTER TABLE produit_membre
+ADD photo VARCHAR(255);
+
+ALTER TABLE produit
+ADD photo VARCHAR(255);
+
+UPDATE produit SET photo='pizza.jpg' WHERE id_produit=1;
+UPDATE produit SET photo='burger.jpg' WHERE id_produit=2;
+UPDATE produit SET photo='HotDog.jpg' WHERE id_produit=3;
+UPDATE produit SET photo='coca.jpg' WHERE id_produit=4;
+UPDATE produit SET photo='jus1.jpg' WHERE id_produit=5;
+UPDATE produit SET photo='eau.jpg' WHERE id_produit=6;
+UPDATE produit SET photo='chips.jpg' WHERE id_produit=7;
+UPDATE produit SET photo='popcorn.jpg' WHERE id_produit=8;
+UPDATE produit SET photo='biscuit.jpg' WHERE id_produit=9;
+UPDATE produit SET photo='Bonbon.jpg' WHERE id_produit=10;
+UPDATE produit SET photo='gateau.jpg' WHERE id_produit=11;
+UPDATE produit SET photo='donnut.jpg' WHERE id_produit=12;
+UPDATE produit SET photo='croissant.jpg' WHERE id_produit=13;
+UPDATE produit SET photo='glace.jpg' WHERE id_produit=14;
+UPDATE produit SET photo='yaourt.jpg' WHERE id_produit=15;

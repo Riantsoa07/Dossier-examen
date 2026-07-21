@@ -2,7 +2,6 @@
 include("fonction.php");
 $id_membre = $_GET['id_membre'];
 $ventes = getMesVentes($id_membre);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +21,7 @@ $ventes = getMesVentes($id_membre);
             <th>Prix</th>
             <th>Quantité</th>
             <th>Date</th>
+            <th>Photo</th>
         </tr>
         <?php foreach($ventes as $v){ ?>
         <tr>
@@ -30,6 +30,21 @@ $ventes = getMesVentes($id_membre);
             <td><?php echo $v['prix_vente']; ?> Ar</td>
             <td><?php echo $v['quantite_dispo']; ?></td>
             <td><?php echo $v['date_dispo']; ?></td>
+            <td>
+            <?php 
+            if($v['photo'] != null){
+            ?>
+            <img src="images/<?php echo $v['photo']; ?>" width="100">
+
+            <?php
+            }else{
+            ?>
+            Pas de photo
+
+            <?php
+            }
+            ?>
+            </td>
         </tr>
         <?php } ?>
 

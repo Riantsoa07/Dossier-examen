@@ -3,7 +3,7 @@ include "fonction.php";
 
 
 $cat = getStatCategorie();
-var_dump($cat);
+
 
 ?>
 <!DOCTYPE html>

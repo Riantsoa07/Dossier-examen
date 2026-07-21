@@ -29,5 +29,7 @@ vendreProduits(
     $photo
 );
 
+
+
 header("Location: accueil.php?id_membre=".$id_membre);
 ?>
